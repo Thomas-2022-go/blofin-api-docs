@@ -1974,6 +1974,8 @@ fromAccount | String | Yes | The remitting account <br>`funding`<br>`futures`<br
 toAccount | String | Yes | The beneficiary account <br>`funding`<br>`futures`<br>`copy_trading`<br>`earn`<br>`spot`<br>`inverse_contract`<br> unified account use `futures`
 amount | String | Yes | Amount to be transferred
 clientId | String | No | Client-supplied ID<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.
+subAccount | String | No | Sub Account Uid
+mainToSubAccount | bool | No | `true`：master->sub <br>`false`：sub->master <br>Required for inter-account transfer
 
 > Response Example:
 
@@ -2233,6 +2235,40 @@ depositId | String | Deposit ID
 Parameter | Type | Description
 ----------------- | ----- | -----------
 accountLevel | String | Account Level <br> `0`: normal  <br> `1`: spot <br> `2`: spot futures <br> `3`: multi currency <br> `0` is normal account <br> `1`/`2`/`3` is unified account
+
+### Request Demo Trading Funds
+
+
+#### HTTP Request
+
+`POST /api/v1/asset/demo-apply-money`
+
+> Request Example:
+```shell
+POST /api/v1/asset/demo-apply-money
+body
+{
+    "adjustType": 0,
+    "demoApplyMoney": [
+        {
+            "currency": "USDT",
+            "amountStr": "109"
+        }
+    ]
+}
+```
+
+#### Request Parameters
+
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+adjustType | Integer | No | 0(default): add demo funds; 1: reduce demo funds
+accountType | String | Yes | Account type <br>`futures`/`spot`   <br> unified account use futures
+demoApplyMoney | Array | Yes | 
+currency | String | Yes | Applied coin, supports BTC, ETH, USDT
+amountStr | String | Yes | Applied amount, the max applied amount in each request <br>BTC: "5" <br>ETH: "50" <br>USDT: "5000,000"
+
+
 
 # Trading
 ## REST API
