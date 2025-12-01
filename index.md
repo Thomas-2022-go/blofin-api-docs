@@ -7303,6 +7303,7 @@ data | Object | Subscribed data
 
 
 
+<!--
 # Spot
 
 ## Overview
@@ -9823,6 +9824,7 @@ The example above demonstrates a complete trading workflow:
   * Ensures WebSocket cleanup on errors
 
 Note: Replace the example credentials with your own API key, secret, and passphrase. The broker ID shown is specific to test credentials and may not be required for your API key.
+-->
 
 # User
 
