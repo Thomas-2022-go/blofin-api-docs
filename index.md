@@ -7356,4 +7356,381 @@ type | Integer | 1: Transaction, 2. Connect to third-party
 expireTime | String | Expiration time, Unix timestamp format in milliseconds, e.g. `1597026383085`
 createTime | String | Creation time, Unix timestamp format in milliseconds, e.g. `1597026383085`
 ips | Array | IP bound
-parentUid | String | if use sub account api key, it shows main account uid; if use main account api key, it shows “0”
+parentUid | String | if use sub account api key, it shows main account uid; if use main account api key, it shows "0"
+
+# Tax
+
+## REST API
+
+### GET Deposit History
+
+Retrieve the deposit records according to the currency, status, and time range in reverse chronological order
+
+#### HTTP Request
+
+`GET /api/v1/asset/deposit-history`
+
+> Request Example:
+```shell
+GET /api/v1/asset/deposit-history
+```
+
+#### Request Parameters
+
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+currency | String | No | Currency, e.g. `USDT`
+depositId | String | No | Deposit ID
+txId | String | No | Hash record of the deposit
+state | String | No | Status of deposit <br> `0`: pending  <br> `1`: done  <br> `2`: failed  <br> `3`: kyt
+before | String | No | Pagination of data to return records newer than the requested ts, Unix timestamp format in milliseconds, e.g. `1656633600000`
+after | String | No | Pagination of data to return records earlier than the requested ts, Unix timestamp format in milliseconds, e.g. `1654041600000`
+limit | String | No | Number of results per request. <br>The maximum is `100`; The default is `20`
+
+> Response Example:
+
+```json
+{
+    "code": "0",
+    "msg": "success",
+    "data": [
+        {
+            "currency": "USDT",
+            "chain": "TRC20",
+            "address": "EXAMPLE_WALLET_ADDRESS",
+            "txId": "h9e69f5133c4f49f5d869d7ef6e11e0f9f5f81cd345678901cdef2345678901",
+            "type": "0",
+            "amount": "9",
+            "state": "1",
+            "ts": "1597026383085",
+            "confirm": "12",
+            "depositId": "c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8"
+        },
+        {
+            "currency": "USDT",
+            "chain": "TRC20",
+            "address": "EXAMPLE_WALLET_ADDRESS",
+            "txId": "i0f70f6244d5f50f6e970e8ef7f22f1f0f6f92de456789012def3456789012",
+            "type": "0",
+            "amount": "9",
+            "state": "1",
+            "ts": "1597026383085",
+            "confirm": "12",
+            "depositId": "d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9"
+        }
+    ]
+}
+```
+
+#### Response Parameters
+Parameter | Type | Description
+----------------- | ----- | -----------
+currency | String | Currency
+chain | String | Chain name, e.g. `ERC20`, `TRC20`
+address | String | Deposit address
+type | String | Deposit type <br>`0`: blockchain deposit <br>`1`: internal transfers
+txId | String | Hash record of the deposit.
+amount | String | Deposit amount
+state | String | Status of deposit <br> `0`: pending  <br> `1`: done  <br> `2`: failed  <br> `3`: kyt
+confirm | String | Confirmations
+ts | String | Time the deposit request was submitted, Unix timestamp format in milliseconds, e.g. `1656633600000` 
+depositId | String | Deposit ID
+
+### GET Withdraw History
+
+Retrieve the withdrawal records according to the currency, withdrawal status, and time range in reverse chronological order
+
+#### HTTP Request
+
+`GET /api/v1/asset/withdrawal-history`
+
+> Request Example:
+```shell
+GET /api/v1/asset/withdrawal-history
+```
+
+#### Request Parameters
+
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+currency | String | No | Currency, e.g. `USDT`
+withdrawId | String | No | Withdrawal ID
+type | String | No | Withdraw type <br>`0`: blockchain withdraw <br>`1`: internal transfers
+txId | String | No | Hash record of the withdrawal
+state | String | No | Status of withdrawal <br> `0`: waiting mannual review  <br> `2`: failed  <br> `3`: success <br> `4`: canceled<br> `6`: kyt<br> `7`: processing
+before | String | No | Pagination of data to return records newer than the requested ts, Unix timestamp format in milliseconds, e.g. `1656633600000`
+after | String | No | Pagination of data to return records earlier than the requested ts, Unix timestamp format in milliseconds, e.g. `1654041600000`
+limit | String | No | Number of results per request. <br>The maximum is `100`; The default is `20`
+
+> Response Example:
+
+```json
+{
+    "code": "0",
+    "msg": "success",
+    "data": [
+        {
+            "currency": "USDT",
+            "chain": "TRC20",
+            "address": "THmWeEJKyb976L76MvrTjeYMyNgiS9aKTu",
+            "txId": "f7c47f3911a2f27f3b647c5ef4c09c9e7d3f69ab123456789abcdef0123456789",
+            "type": "0",
+            "amount": "40.011111",
+            "fee": "0.1",
+            "feeCurrency": "USDT",
+            "state": "0",
+            "clientId": null,
+            "ts": "1695262311039",
+            "tag": null,
+            "memo": null,
+            "withdrawId": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+        },
+        {
+            "currency": "USDT",
+            "chain": "TRC20",
+            "address": "THmWeEJKyb976L76MvrTjeYMyNgiS9aKTu",
+            "txId": "g8d58f4022b3f38f4c758d6ef5d10d0f8e4f70bc234567890bcdef1234567890",
+            "type": "0",
+            "amount": "9999.899",
+            "fee": "0.1",
+            "feeCurrency": "USDT",
+            "state": "4",
+            "clientId": null,
+            "ts": "1695262311039",
+            "tag": null,
+            "memo": null,
+            "withdrawId": "b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7"
+        }
+    ]
+}
+```
+
+#### Response Parameters
+Parameter | Type | Description
+----------------- | ----- | -----------
+currency | String | Withdraw currency
+chain | String | Chain name, e.g. `ERC20`, `TRC20`
+address | String | Receiving address
+type | String | Withdraw type <br>`0`: blockchain withdraw <br>`1`: internal transfers
+txId | String | Hash record of the withdrawal.
+amount | String | Withdrawal amount
+fee | String | Withdrawal fee amount
+feeCurrency | String | Withdrawal fee currency, e.g. `USDT`
+state | String | Status of withdrawal <br> `0`: waiting mannual review  <br> `2`: failed  <br> `3`: success <br> `4`: canceled<br> `6`: kyt<br> `7`: processing
+clientId | String | Client-supplied ID
+ts | String | Time the withdrawal request was submitted, Unix timestamp format in milliseconds, e.g. `1655251200000`.
+tag | String | Some currencies require a tag for withdrawals. This is not returned if not required.
+memo | String | Some currencies require this parameter for withdrawals. This is not returned if not required.
+withdrawId | String | Withdrawal ID
+
+### GET Funds Transfer History
+
+Query the funds transfer records.
+
+#### HTTP Request
+
+`GET /api/v1/asset/bills`
+
+> Request Example:
+```shell
+GET /api/v1/asset/bills
+```
+
+#### Request Parameters
+
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+currency | String | No | Transfer currency, e.g. `USDT`
+fromAccount | String | No | The remitting account <br>`funding`<br>`futures`<br>`copy_trading`<br>`earn`<br>`spot`<br>`inverse_contract`<br> unified account use `futures`
+toAccount | String | No | The beneficiary account <br>`funding`<br>`futures`<br>`copy_trading`<br>`earn`<br>`spot`<br>`inverse_contract`<br> unified account use `futures`
+before | String | No | Pagination of data to return records newer than the requested ts, Unix timestamp format in milliseconds, e.g. `1656633600000`
+after | String | No | Pagination of data to return records earlier than the requested ts, Unix timestamp format in milliseconds, e.g. `1654041600000`
+limit | String | No | Number of results per request. The maximum is `100`; The default is `100`
+
+> Response Example:
+
+```json
+{
+    "code": "0",
+    "msg": "success",
+    "data": [
+        {
+            "transferId": "3743",
+            "currency": "USDT",
+            "fromAccount": "futures",
+            "toAccount": "funding",
+            "amount": "1.000000000000000000",
+            "ts": "1695264049618",
+            "clientId": "cccc12121"
+        }
+    ]
+}
+```
+
+#### Response Parameters
+Parameter | Type | Description
+----------------- | ----- | -----------
+currency | String | Transfer currency
+fromAccount | String | The remitting account <br>`funding`<br>`futures`<br>`copy_trading`<br>`earn`<br>`spot`
+toAccount | String | The beneficiary account <br>`funding`<br>`futures`<br>`copy_trading`<br>`earn`<br>`spot`
+amount | String | Balance at the account level
+ts | String | Creation time, Unix timestamp format in milliseconds, e.g.`1597026383085`
+clientId | String | Client-supplied ID for transfer
+transferId | String | Transfer ID
+
+### GET Spot Trade History
+
+Retrieve recently-filled transaction details for spot trading.
+
+##### HTTP Request
+`GET /api/v1/spot/trade/fills-history`
+
+> Request Example:
+```shell
+GET /api/v1/spot/trade/fills-history?instType=SPOT
+```
+
+##### Request Parameters
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+instType | String | Yes | Instrument type  <br>`SPOT`: Spot
+instId | String | No | Instrument ID, e.g. `BTC-USDT`
+orderId | String | No | Order ID
+after | String | No | Pagination of data to return records earlier than the requested `tradeId`
+before | String | No | Pagination of data to return records newer than the requested `tradeId`
+begin | String | No | Filter with a begin timestamp. Unix timestamp format in milliseconds, e.g. `1597026383085`
+end | String | No | Filter with an end timestamp. Unix timestamp format in milliseconds, e.g. `1597026383085`
+limit | String | No | Number of results per request. The maximum is `100`; The default is `20`
+
+The before and after parameters cannot be used simultaneously.
+
+> Response Example:
+```json
+{
+    "code": "0",
+    "msg": "success",
+    "data": [
+        {
+            "instId": "ETH-USDT",
+            "tradeId": "7772187",
+            "orderId": "28697026",
+            "fillPrice": "1587.800000000000000000",
+            "fillSize": "2.000000000000000000",
+            "fillPnl": "0.000000000000000000",
+            "side": "buy",
+            "fee": "0.190536000000000000",
+            "ts": "1696853354238",
+            "brokerId": "",
+            "feeCurrency": "base_currency"
+        },
+        {
+            "instId": "ETH-USDT",
+            "tradeId": "7772186",
+            "orderId": "28697025",
+            "fillPrice": "1587.800000000000000000",
+            "fillSize": "1.000000000000000000",
+            "fillPnl": "0.000000000000000000",
+            "side": "buy",
+            "fee": "0.095268000000000000",
+            "ts": "1696853354224",
+            "brokerId": "",
+            "feeCurrency": "base_currency"
+        }
+    ]
+}
+```
+
+##### Response Parameters
+Parameter | Type | Description
+----------------- | ----- | -----------
+instId | String | Instrument ID
+tradeId | String | Trade ID
+orderId | String | Order ID
+fillPrice | String | filled price
+fillSize | String | Filled quantity
+fillPnl | String | Last filled profit and loss, applicable to orders which have a trade and aim to close position.
+side | String | Order side
+fee | String | Fee
+ts | String | Data generation time, Unix timestamp format in milliseconds, e.g. `1597026383085`.
+brokerId | String | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
+feeCurrency | String | Fee currency <br>For maker sell orders of Spot and Margin, this represents the quote currency. For all other cases, it represents the currency in which fees are charged.
+
+### GET Futures Trade History
+
+Retrieve recently-filled transaction details.
+
+#### HTTP Request
+
+`GET /api/v1/trade/fills-history`
+
+> Request Example:
+```shell
+GET /api/v1/trade/fills-history
+```
+
+#### Request Parameters
+
+Parameter | Type | Required | Description
+----------------- | ----- | ------- | -----------
+instId | String | No | Instrument ID, e.g. `BTC-USDT`
+orderId | String | No | Order ID
+after | String | No | Pagination of data to return records earlier than the requested `tradeId`
+before | String | No | Pagination of data to return records newer than the requested `tradeId`
+begin | String | No | Filter with a begin timestamp. Unix timestamp format in milliseconds, e.g. `1597026383085`
+end | String | No | Filter with an end timestamp. Unix timestamp format in milliseconds, e.g. `1597026383085`
+limit | String | No | Number of results per request. The maximum is `100`; The default is `20`
+
+The `before` and `after` parameters cannot be used simultaneously.
+
+> Response Example:
+
+```json
+{
+    "code": "0",
+    "msg": "success",
+    "data": [
+        {
+            "instId": "ETH-USDT",
+            "tradeId": "7772187",
+            "orderId": "28697026",
+            "fillPrice": "1587.800000000000000000",
+            "fillSize": "2.000000000000000000",
+            "fillPnl": "0.000000000000000000",
+            "positionSide": "long",
+            "side": "buy",
+            "fee": "0.190536000000000000",
+            "ts": "1696853354238",
+            "brokerId": ""
+        },
+        {
+            "instId": "ETH-USDT",
+            "tradeId": "7772186",
+            "orderId": "28697025",
+            "fillPrice": "1587.800000000000000000",
+            "fillSize": "1.000000000000000000",
+            "fillPnl": "0.000000000000000000",
+            "positionSide": "short",
+            "side": "buy",
+            "fee": "0.095268000000000000",
+            "ts": "1696853354224",
+            "brokerId": ""
+        }
+    ]
+}
+```
+
+#### Response Parameters
+Parameter | Type | Description
+----------------- | ----- | -----------
+instId | String | Instrument ID
+tradeId | String | Trade ID
+orderId | String | Order ID
+fillPrice | String | filled price
+fillSize | String | Filled quantity
+fillPnl | String | Last filled profit and loss, applicable to orders which have a trade and aim to close position.
+positionSide | String | Position side, `long`,`short`,`net`
+side | String | Order side
+fee | String | Fee
+ts | String | Data generation time, Unix timestamp format in milliseconds, e.g. `1597026383085`.
+brokerId | String | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
+
