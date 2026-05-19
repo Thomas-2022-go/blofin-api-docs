@@ -2928,7 +2928,13 @@ positionSide | String | Position side<br>`long`<br>`short`<br>`net`
     "positionSide":"long",
     "side":"sell",
     "price":"23212.2",
-    "size":"2"
+    "size":"2",
+    "tpTriggerPrice":"24000",
+    "tpOrderPrice":"-1",
+    "tpTriggerPriceType":"last",
+    "slTriggerPrice":"22000",
+    "slOrderPrice":"-1",
+    "slTriggerPriceType":"last"
 }
 ```
 
@@ -2947,8 +2953,10 @@ reduceOnly | String | No | Whether orders can only reduce in position size. <br>
 clientOrderId | String | No | Client Order ID as assigned by the client<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.
 tpTriggerPrice | String | No | Take-profit trigger price<br>If you fill in this parameter, you should fill in the `tpOrderPrice` as well.
 tpOrderPrice | String | No | Take-profit order price.<br>If you fill in this parameter, you should fill in the `tpTriggerPrice` as well.<br>If the price is -1, take-profit will be executed at the market price.
+tpTriggerPriceType | String | No | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 slTriggerPrice | String | No | Stop-loss trigger price<br>If you fill in this parameter, you should fill in the `slOrderPrice` as well.
 slOrderPrice | String | No | Stop-loss order price.<br>If you fill in this parameter, you should fill in the `slTriggerPrice` as well.<br>If the price is -1, stop-loss will be executed at the market price.
+slTriggerPriceType | String | No | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 brokerId | String | No | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
 
 > Response Example:
@@ -2997,8 +3005,10 @@ msg | String | Rejection or success message of event execution.
     "clientOrderId": "eeeeee11223112",
     "tpTriggerPrice": "",
     "tpOrderPrice": "",
+    "tpTriggerPriceType": "last",
     "slTriggerPrice": "",
-    "slOrderPrice": ""
+    "slOrderPrice": "",
+    "slTriggerPriceType": "last"
   },
   {
     "instId": "ETH-USDT",
@@ -3012,8 +3022,10 @@ msg | String | Rejection or success message of event execution.
     "clientOrderId": "eeeeee1122321",
     "tpTriggerPrice": "",
     "tpOrderPrice": "",
+    "tpTriggerPriceType": "last",
     "slTriggerPrice": "",
-    "slOrderPrice": ""
+    "slOrderPrice": "",
+    "slTriggerPriceType": "last"
   }
 ]
 ```
@@ -3033,8 +3045,10 @@ reduceOnly | String | No | Whether orders can only reduce in position size. <br>
 clientOrderId | String | No | Client Order ID as assigned by the client<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.
 tpTriggerPrice | String | No | Take-profit trigger price<br>If you fill in this parameter, you should fill in the `tpOrderPrice` as well.
 tpOrderPrice | String | No | Take-profit order price.<br>If you fill in this parameter, you should fill in the `tpTriggerPrice` as well.<br>If the price is -1, take-profit will be executed at the market price.
+tpTriggerPriceType | String | No | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 slTriggerPrice | String | No | Stop-loss trigger price<br>If you fill in this parameter, you should fill in the `slOrderPrice` as well.
 slOrderPrice | String | No | Stop-loss order price.<br>If you fill in this parameter, you should fill in the `slTriggerPrice` as well.<br>If the price is -1, stop-loss will be executed at the market price.
+slTriggerPriceType | String | No | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 brokerId | String | No | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
 
 > Response Example:
@@ -3079,8 +3093,10 @@ msg | String | Rejection or success message of event execution.
   "side": "sell",
   "tpTriggerPrice": "1661.1",
   "tpOrderPrice": "",
+  "tpTriggerPriceType": "last",
   "slTriggerPrice": "",
   "slOrderPrice": "",
+  "slTriggerPriceType": "last",
   "size": "1",
   "reduceOnly": "true",
   "clientOrderId": ""
@@ -3097,8 +3113,10 @@ positionSide | String | Yes | Position side<br>Default `net` for One-way Mode <b
 side | String | Yes | Order side, `buy` `sell`
 tpTriggerPrice | String | No | Take-profit trigger price<br>If you fill in this parameter, you should fill in the `tpOrderPrice` as well.<br>Either `tpTriggerPrice` or `slTriggerPrice` must be provided.
 tpOrderPrice | String | No | Take-profit order price.<br>If you fill in this parameter, you should fill in the `tpTriggerPrice` as well.<br>If the price is -1, take-profit will be executed at the market price.
+tpTriggerPriceType | String | No | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 slTriggerPrice | String | No | Stop-loss trigger price<br>If you fill in this parameter, you should fill in the `slOrderPrice` as well.<br>Either `tpTriggerPrice` or `slTriggerPrice` must be provided.
 slOrderPrice | String | No | Stop-loss order price.<br>If you fill in this parameter, you should fill in the `slTriggerPrice` as well.<br>If the price is -1, stop-loss will be executed at the market price.
+slTriggerPriceType | String | No | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 size | String | Yes | Quantity  <br> If the quantity is -1, it means entire positions
 reduceOnly | String | No | Whether orders can only reduce in position size. <br>Valid options: `true` or `false`. The default value is `false`.<br>When `reduceOnly = true` and the opposite order size exceeds the position size. The position will be fully closed, and no new position will be opened.
 clientOrderId | String | No | Client Order ID as assigned by the client<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 32 characters.
@@ -3187,10 +3205,10 @@ triggerPriceType | String | No | Trigger price type `last`: last price
 attachAlgoOrders | Array of object | No | Attached SL/TP orders info Applicable to Spot and futures mode/Multi-currency margin/Portfolio margin
 `>`tpTriggerPrice | String |No | Take-profit trigger price
 `>`tpOrderPrice | String |No | Take-profit order price <br>If the price is `-1`, take-profit will be executed at the market price.
-`>`tpTriggerPriceType | String |No | Trigger price type last: last price
+`>`tpTriggerPriceType | String |No | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 `>`slTriggerPrice | String |No | Stop-loss trigger price 
 `>`slOrderPrice | String |No |  Stop-loss order price <br>If the price is `-1`, stop-loss will be executed at the market price.
-`>`slTriggerPriceType | String |No |  Stop-loss order trigger price type last: last price
+`>`slTriggerPriceType | String |No |  Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price<br>The default is `last`.
 
 
 
