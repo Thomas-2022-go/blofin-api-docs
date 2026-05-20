@@ -3521,8 +3521,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "updateTime": "1697031292788",
             "orderCategory": "normal",
             "tpTriggerPrice": "1688.000000000000000000",
+            "tpTriggerPriceType": "last",
             "slTriggerPrice": "1299.000000000000000000",
             "slOrderPrice": null,
+            "slTriggerPriceType": "last",
             "tpOrderPrice": null,
             "algoClientOrderId": "aaa",
             "algoId": "11756185",
@@ -3550,8 +3552,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "updateTime": "1697031251430",
             "orderCategory": "normal",
             "tpTriggerPrice": null,
+            "tpTriggerPriceType": null,
             "slTriggerPrice": null,
             "slOrderPrice": null,
+            "slTriggerPriceType": null,
             "tpOrderPrice": null,
             "algoClientOrderId": "",
             "algoId": "",
@@ -3585,8 +3589,10 @@ updateTime | String | Update time, Unix timestamp format in milliseconds, e.g. `
 orderCategory | String | Order category<br>`normal`<br>`full_liquidation`<br>`partial_liquidation`<br>`adl`<br>`tp`<br>`sl`
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. <br>If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. <br>If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 algoClientOrderId | String | There will be a value when algo order attaching `clientOrderId` is triggered, or it will be "".
 algoId | String | Algo ID. There will be a value when algo order is triggered, or it will be "".
 brokerId | String | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
@@ -3646,8 +3652,10 @@ algoClientOrderId | String | Conditional | Algo Client Order ID as assigned by t
         "updateTime": "1697031292788",
         "orderCategory": "normal",
         "tpTriggerPrice": "1688.000000000000000000",
+        "tpTriggerPriceType": "last",
         "slTriggerPrice": "1299.000000000000000000",
         "slOrderPrice": null,
+        "slTriggerPriceType": "last",
         "tpOrderPrice": null,
         "algoClientOrderId": "aaa",
         "algoId": "11756185",
@@ -3680,8 +3688,10 @@ updateTime | String | Update time, Unix timestamp format in milliseconds, e.g. `
 orderCategory | String | Order category<br>`normal`<br>`full_liquidation`<br>`partial_liquidation`<br>`adl`<br>`tp`<br>`sl`
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. <br>If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. <br>If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 algoClientOrderId | String | There will be a value when algo order attaching `clientOrderId` is triggered, or it will be "".
 algoId | String | Algo ID. There will be a value when algo order is triggered, or it will be "".
 brokerId | String | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
@@ -3728,8 +3738,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "side": "sell",
             "tpTriggerPrice": "1666.000000000000000000",
             "tpOrderPrice": null,
+            "tpTriggerPriceType": "last",
             "slTriggerPrice": "1222.000000000000000000",
             "slOrderPrice": null,
+            "slTriggerPriceType": "last",
             "size": "1",
             "state": "live",
             "leverage": "3",
@@ -3754,8 +3766,10 @@ positionSide | String | Position side
 side | String | Order side
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 size | String | Number of contracts to buy or sell. For contract size details, refer to the /api/v1/market/instruments endpoint
 state | String | State,`live`, `effective`, `canceled`, `order_failed`
 leverage | String | Leverage
@@ -3800,8 +3814,10 @@ clientOrderId | String | Conditional | Client Order ID as assigned by the client
         "side": "sell",
         "tpTriggerPrice": "1666.000000000000000000",
         "tpOrderPrice": null,
+        "tpTriggerPriceType": "last",
         "slTriggerPrice": "1222.000000000000000000",
         "slOrderPrice": null,
+        "slTriggerPriceType": "last",
         "size": "1",
         "state": "live",
         "leverage": "3",
@@ -3825,8 +3841,10 @@ positionSide | String | Position side
 side | String | Order side
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 size | String | Number of contracts to buy or sell. For contract size details, refer to the /api/v1/market/instruments endpoint
 state | String | State,`live`, `effective`, `canceled`, `order_failed`
 leverage | String | Leverage
@@ -4036,8 +4054,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "orderCategory": "normal",
             "tpTriggerPrice": null,
             "tpOrderPrice": null,
+            "tpTriggerPriceType": null,
             "slTriggerPrice": null,
             "slOrderPrice": null,
+            "slTriggerPriceType": null,
             "cancelSource": "user_canceled",
             "cancelSourceReason": "Order canceled by user",
             "algoClientOrderId": "aaa",
@@ -4066,8 +4086,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "orderCategory": "normal",
             "tpTriggerPrice": "1666.000000000000000000",
             "tpOrderPrice": null,
+            "tpTriggerPriceType": "last",
             "slTriggerPrice": "1100.000000000000000000",
             "slOrderPrice": null,
+            "slTriggerPriceType": "last",
             "cancelSource": "user_canceled",
             "cancelSourceReason": "Order canceled by user",
             "algoClientOrderId": "",
@@ -4102,8 +4124,10 @@ updateTime | String | Update time, Unix timestamp format in milliseconds, e.g. `
 orderCategory | String | Order category<br>`normal`<br>`full_liquidation`<br>`partial_liquidation`<br>`adl`<br>`tp`<br>`sl`
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 cancelSource | String | Type of the cancellation source.
 cancelSourceReason | String | Reason for the cancellation.
 algoClientOrderId | String | There will be a value when algo order attaching `clientOrderId` is triggered, or it will be "".
@@ -4162,8 +4186,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "orderCategory": "normal",
             "tpTriggerPrice": "1661.100000000000000000",
             "tpOrderPrice": null,
+            "tpTriggerPriceType": "last",
             "slTriggerPrice": null,
             "slOrderPrice": null,
+            "slTriggerPriceType": null,
             "brokerId": ""
         },
         {
@@ -4182,8 +4208,10 @@ The `before` and `after` parameters cannot be used simultaneously.
             "orderCategory": "normal",
             "tpTriggerPrice": "1661.100000000000000000",
             "tpOrderPrice": null,
+            "tpTriggerPriceType": "last",
             "slTriggerPrice": null,
             "slOrderPrice": null,
+            "slTriggerPriceType": null,
             "brokerId": ""
         }
     ]
@@ -4208,8 +4236,10 @@ actualSize | String | Actual order quantity
 orderCategory | String | Order category<br>`normal`<br>`full_liquidation`<br>`partial_liquidation`<br>`adl`<br>`tp`<br>`sl`
 tpTriggerPrice | String | Take-profit trigger price
 tpOrderPrice | String | Take-profit order price. If the price is `-1`, take-profit will be executed at the market price.
+tpTriggerPriceType | String | Take-profit trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 slTriggerPrice | String | Stop-loss trigger price
 slOrderPrice | String | Stop-loss order price. If the price is `-1`, stop-loss will be executed at the market price.
+slTriggerPriceType | String | Stop-loss trigger price type<br>`last`: last price<br>`mark`: mark price<br>`index`: index price
 createTime | String | Creation time, Unix timestamp format in milliseconds, e.g. `1597026383085`
 brokerId | String | Broker ID provided by BloFin.<br>A combination of case-sensitive alphanumerics, all numbers, or all letters of up to 16 characters.
 
